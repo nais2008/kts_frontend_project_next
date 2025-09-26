@@ -1,0 +1,1 @@
+# kts_frontend_project_next
