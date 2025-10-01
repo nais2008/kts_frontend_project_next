@@ -1,0 +1,37 @@
+@use "@/styles/variables";
+
+.input {
+  &__wrapper {
+    display: flex;
+    position: relative;
+  }
+  &__field {
+    padding: variables.$spacing-16 variables.$spacing-12;
+    padding-right: variables.$spacing-40;
+    width: 100%;
+    font-size: 16px;
+    border-radius: 0;
+    border: 1px solid variables.$back-color-second;
+    outline: none;
+    color: variables.$primary-color;
+    background-color: variables.$back-color-second;
+    border-radius: variables.$border-radius;
+
+    &::placeholder {
+      color: variables.$secondary-color;
+    }
+    &:not(input:disabled):focus {
+      border: 1px solid variables.$accent-color;
+    }
+    &:disabled {
+      background-color: variables.$grey;
+      cursor: not-allowed;
+    }
+  }
+  &__afterSlot {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}

@@ -1,0 +1,19 @@
+@keyframes rotate-anim {
+  0% {
+    rotate: 0deg;
+  }
+  100% {
+    rotate: 360deg;
+  }
+}
+
+@keyframes loading-anim {
+  0% {
+    top: -100%;
+    left: 0;
+  }
+  100% {
+    top: 0;
+    left: 100%;
+  }
+}

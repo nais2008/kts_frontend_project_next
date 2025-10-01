@@ -1,0 +1,14 @@
+@use "@/styles/variables";
+@use "@/styles/mixins";
+
+.footer {
+  padding-block: variables.$spacing-20;
+
+  &__container {
+    @include mixins.container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+}
