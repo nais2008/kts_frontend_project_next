@@ -1,41 +1,37 @@
-import { makeAutoObservable } from "mobx"
+import { action, makeObservable, observable } from "mobx"
+import qs from "qs"
 
-class QueryStore {
-  params: Map<string, string> = new Map()
+type PrivateFields = "_params"
+
+class QueryParamsStore {
+  private _params: qs.ParsedQs = {}
+  private _search: string = ""
 
   constructor() {
-    makeAutoObservable(this)
-    this.loadFromUrl()
-  }
-
-  setParam(key: string, value: string) {
-    if (value) {
-      this.params.set(key, value)
-    } else {
-      this.params.delete(key)
+    makeObservable<QueryParamsStore, PrivateFields>(this, {
+      _params: observable.ref,
+      setSearch: action,
+    })
+    
+    if (typeof window !== 'undefined') {
+      this.setSearch(window.location.search);
     }
-    this.updateUrl()
   }
 
-  getParam(key: string) {
-    return this.params.get(key) || ""
+  getParam(
+    key: string
+  ): undefined | string | qs.ParsedQs | (string | qs.ParsedQs)[] {
+    return this._params[key]
   }
 
-  loadFromUrl() {
-    const searchParams = new URLSearchParams(window.location.search)
-    searchParams.forEach((value, key) => {
-      this.params.set(key, value)
-    })
-  }
+  setSearch(search: string) {
+    search = search.startsWith("?") ? search.slice(1) : search
 
-  updateUrl() {
-    const searchParams = new URLSearchParams()
-    this.params.forEach((value, key) => {
-      searchParams.set(key, value)
-    })
-    const newUrl = `${window.location.pathname}?${searchParams.toString()}`
-    window.history.replaceState(null, "", newUrl)
+    if (this._search !== search) {
+      this._search = search
+      this._params = qs.parse(search)
+    }
   }
 }
 
-export default QueryStore
+export default QueryParamsStore

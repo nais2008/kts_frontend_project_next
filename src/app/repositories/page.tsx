@@ -1,8 +1,10 @@
 import type { Metadata } from "next"
 
-import { StoreProvider } from "@/providers/RootProvider"
+import { GitHubStoreContextProvider } from "@/providers/GutHubProvider"
 
+import Repositories from "./Repositories"
 import styles from "./page.module.scss"
+import SearchBar from "./SearchBar"
 
 export const metadata: Metadata = {
   title: "Repositories",
@@ -11,9 +13,12 @@ export const metadata: Metadata = {
 
 function RepositoriesPage() {
   return (
-    <StoreProvider>
-      <div className={styles.repositories__container}></div>
-    </StoreProvider>
+    <GitHubStoreContextProvider>
+      <div className={styles.repositories__container}>
+        <SearchBar />
+        <Repositories className={styles.repositories} />
+      </div>
+    </GitHubStoreContextProvider>
   )
 }
 

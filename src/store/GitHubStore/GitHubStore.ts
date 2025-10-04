@@ -27,8 +27,9 @@ import {
 } from "mobx"
 
 const FAVORITES_KEY = "favoriteRepos"
+const REPO_PER_PAGE = 30
 
-type PrivateFields = "_list" | "_meta" | "_favorites"
+type PrivateFields = "_list" | "_meta" | "_favorites" | "_currentPage" | "_hasMore"
 
 class GitHubStore implements ILocalStore {
   private readonly _apiStore = new ApiStore()
@@ -38,11 +39,16 @@ class GitHubStore implements ILocalStore {
   private _meta: MetaValues = MetaValues.INITIAL
   private _favorites: IGitHubRepoModel[] = []
 
+  private _currentPage: number = 1
+  private _hasMore: boolean = true
+
   constructor() {
     makeObservable<GitHubStore, PrivateFields>(this, {
       _list: observable.ref,
       _meta: observable,
       _favorites: observable.ref,
+      _currentPage: observable,
+      _hasMore: observable,
       list: computed,
       meta: computed,
       favorites: computed,
@@ -90,11 +96,11 @@ class GitHubStore implements ILocalStore {
     this._meta = MetaValues.LOADING
     this._list = getInitialCollectionModel()
 
-    const { orgName, page = 1, perPage = 9 } = params
+    const { orgName } = params
 
     const response = await this._apiStore.request<IGitHubRepoAPI[]>({
       method: HTTPMethod.GET,
-      endpoint: ENDPOINTS.repositories.create(orgName, perPage, page),
+      endpoint: ENDPOINTS.repositories.create(orgName),
       data: {},
       headers: {},
     })
@@ -123,10 +129,15 @@ class GitHubStore implements ILocalStore {
 
   private readonly _qpReaction: IReactionDisposer = reaction(
     () => rootStore.query.getParam("search"),
-    (search) => {
-      console.log(search)
-    }
-  )
-}
+    (searchTerm) => {
+      const orgName = typeof searchTerm === 'string' && searchTerm.length > 0
+        ? searchTerm
+        : "ktsstudio"
+
+      this.getOrganizationReposList({ orgName: orgName });
+    },
+    { fireImmediately: true }
+    )
+  }
 
 export default GitHubStore

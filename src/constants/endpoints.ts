@@ -1,11 +1,7 @@
 export const ENDPOINTS = {
   repositories: {
-    create: (
-      org: string,
-      perPage: number,
-      page: number,
-      type: string = "all"
-    ) => `/orgs/${org}/repos?type=${type}&per_page=${perPage}&page=${page}`,
+    create: (org: string, type: string = "all") =>
+      `/orgs/${org}/repos?type=${type}`,
   },
   repository: {
     info: {

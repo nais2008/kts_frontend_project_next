@@ -2,12 +2,12 @@ import GitHubStore from "../GitHubStore"
 import QueryStore from "../QueryStore"
 
 class RootStore {
-  github: GitHubStore
+  // github: GitHubStore
   query: QueryStore
 
   constructor() {
     this.query = new QueryStore()
-    this.github = new GitHubStore()
+    // this.github = new GitHubStore()
   }
 }
 
