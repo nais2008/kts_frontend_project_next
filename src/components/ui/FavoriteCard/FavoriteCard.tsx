@@ -2,7 +2,7 @@
 
 import React from "react"
 
-import { useRouter } from "next/router"
+import { useRouter } from "next/navigation"
 
 import { ROUTES } from "@/config/routes.config"
 import type { IGitHubRepoModel } from "@/shared/interfaces/repository.interface"

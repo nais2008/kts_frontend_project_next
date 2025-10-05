@@ -12,9 +12,9 @@ class QueryParamsStore {
       _params: observable.ref,
       setSearch: action,
     })
-    
-    if (typeof window !== 'undefined') {
-      this.setSearch(window.location.search);
+
+    if (typeof window !== "undefined") {
+      this.setSearch(window.location.search)
     }
   }
 

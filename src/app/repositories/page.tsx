@@ -3,8 +3,8 @@ import type { Metadata } from "next"
 import { GitHubStoreContextProvider } from "@/providers/GutHubProvider"
 
 import Repositories from "./Repositories"
-import styles from "./page.module.scss"
 import SearchBar from "./SearchBar"
+import styles from "./page.module.scss"
 
 export const metadata: Metadata = {
   title: "Repositories",

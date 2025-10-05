@@ -1,0 +1,20 @@
+@use "@/styles/variables";
+
+.repository__stats {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  color: variables.$secondary-color;
+
+  p {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+
+    &:hover {
+      color: var(--hoverColor, #000);
+    }
+  }
+}

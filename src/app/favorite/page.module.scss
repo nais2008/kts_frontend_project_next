@@ -1,16 +1,12 @@
-@use "@/styles/mixins";
 @use "@/styles/variables";
+@use "@/styles/mixins";
 
-.repositories {
+.favorites {
   display: grid;
   grid-template-columns: repeat(auto-fit, 350px);
   justify-content: space-between;
   gap: 80px 10px;
 
-  & > p {
-    grid-column: 1 / -1;
-    text-align: center;
-  }
   @media screen and (width <= variables.$breakpoint-xl) {
     & {
       justify-content: center;
@@ -25,6 +21,30 @@
       flex-direction: column;
       gap: 40px;
       padding-top: variables.$spacing-40;
+    }
+  }
+  &__title {
+    width: 100%;
+    margin-top: variables.$spacing-24;
+    font-size: 2rem;
+    text-align: center;
+  }
+  &__empty {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+    text-align: center;
+
+    h1 {
+      font-size: 1.5rem;
+      margin-top: variables.$spacing-16;
+    }
+
+    p {
+      margin-top: variables.$spacing-8;
+      max-width: 300px;
     }
   }
 }

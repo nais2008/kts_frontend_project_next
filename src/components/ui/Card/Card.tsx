@@ -35,8 +35,8 @@ const Card: React.FC<CardProps> = ({
         src={image}
         alt={image}
         className={styles.card__image}
-        width={350}
-        height={350}
+        width={500}
+        height={500}
       />
       <div className={styles.card__content}>
         <div className={styles.card__text}>

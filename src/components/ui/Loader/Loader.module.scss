@@ -12,6 +12,7 @@
   border-radius: variables.$border-radius;
   background-color: variables.$back-color-second;
   padding-bottom: variables.$spacing-20;
+  width: 100%;
 
   &_large {
     @include mixins.container {

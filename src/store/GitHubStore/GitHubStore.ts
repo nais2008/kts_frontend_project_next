@@ -27,9 +27,15 @@ import {
 } from "mobx"
 
 const FAVORITES_KEY = "favoriteRepos"
-const REPO_PER_PAGE = 30
+const REPO_PER_PAGE = 9
 
-type PrivateFields = "_list" | "_meta" | "_favorites" | "_currentPage" | "_hasMore"
+type PrivateFields =
+  | "_list"
+  | "_meta"
+  | "_favorites"
+  | "_currentPage"
+  | "_hasMore"
+  | "_currentOrg"
 
 class GitHubStore implements ILocalStore {
   private readonly _apiStore = new ApiStore()
@@ -39,8 +45,9 @@ class GitHubStore implements ILocalStore {
   private _meta: MetaValues = MetaValues.INITIAL
   private _favorites: IGitHubRepoModel[] = []
 
-  private _currentPage: number = 1
-  private _hasMore: boolean = true
+  private _currentPage = 1
+  private _hasMore = true
+  private _currentOrg = "ktsstudio"
 
   constructor() {
     makeObservable<GitHubStore, PrivateFields>(this, {
@@ -49,10 +56,13 @@ class GitHubStore implements ILocalStore {
       _favorites: observable.ref,
       _currentPage: observable,
       _hasMore: observable,
+      _currentOrg: observable,
       list: computed,
       meta: computed,
       favorites: computed,
+      hasMore: computed,
       getOrganizationReposList: action,
+      getMoreRepos: action,
       toggleFavorite: action,
     })
 
@@ -72,6 +82,10 @@ class GitHubStore implements ILocalStore {
 
   get favorites(): IGitHubRepoModel[] {
     return this._favorites
+  }
+
+  get hasMore(): boolean {
+    return this._hasMore
   }
 
   isFavorite(repoId: number): boolean {
@@ -95,14 +109,28 @@ class GitHubStore implements ILocalStore {
   ): Promise<void> {
     this._meta = MetaValues.LOADING
     this._list = getInitialCollectionModel()
+    this._currentPage = 1
+    this._hasMore = true
+    this._currentOrg = params.orgName
 
-    const { orgName } = params
+    await this._fetchRepos(params.orgName, this._currentPage)
+  }
 
+  async getMoreRepos(): Promise<void> {
+    if (!this._hasMore || this._meta === MetaValues.LOADING) return
+    this._meta = MetaValues.LOADING
+
+    const nextPage = this._currentPage + 1
+    await this._fetchRepos(this._currentOrg, nextPage, true)
+  }
+
+  private async _fetchRepos(orgName: string, page: number, append = false) {
     const response = await this._apiStore.request<IGitHubRepoAPI[]>({
       method: HTTPMethod.GET,
       endpoint: ENDPOINTS.repositories.create(orgName),
       data: {},
       headers: {},
+      params: { per_page: REPO_PER_PAGE, page },
     })
 
     runInAction(() => {
@@ -111,15 +139,18 @@ class GitHubStore implements ILocalStore {
         return
       }
 
-      try {
-        const list = response.data.map(normilizeRepo)
-        this._list = normilizeCollection(list, (i) => i.id)
-        this._meta = MetaValues.SUCCESS
-      } catch (e) {
-        console.error(e)
-        this._list = getInitialCollectionModel()
-        this._meta = MetaValues.ERROR
+      const list = response.data.map(normilizeRepo)
+      const newList = normilizeCollection(list, (i) => i.id)
+
+      if (append) {
+        this._list = normilizeCollection([...this.list, ...list], (i) => i.id)
+      } else {
+        this._list = newList
       }
+
+      this._currentPage = page
+      this._hasMore = list.length === REPO_PER_PAGE
+      this._meta = MetaValues.SUCCESS
     })
   }
 
@@ -130,14 +161,14 @@ class GitHubStore implements ILocalStore {
   private readonly _qpReaction: IReactionDisposer = reaction(
     () => rootStore.query.getParam("search"),
     (searchTerm) => {
-      const orgName = typeof searchTerm === 'string' && searchTerm.length > 0
-        ? searchTerm
-        : "ktsstudio"
-
-      this.getOrganizationReposList({ orgName: orgName });
+      const orgName =
+        typeof searchTerm === "string" && searchTerm.length > 0
+          ? searchTerm
+          : "ktsstudio"
+      this.getOrganizationReposList({ orgName })
     },
     { fireImmediately: true }
-    )
-  }
+  )
+}
 
 export default GitHubStore
