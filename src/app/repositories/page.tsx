@@ -5,6 +5,7 @@ import { GitHubStoreContextProvider } from "@/providers/GutHubProvider"
 import Repositories from "./Repositories"
 import SearchBar from "./SearchBar"
 import styles from "./page.module.scss"
+import { Suspense } from "react"
 
 export const metadata: Metadata = {
   title: "Repositories",
@@ -13,12 +14,14 @@ export const metadata: Metadata = {
 
 function RepositoriesPage() {
   return (
-    <GitHubStoreContextProvider>
-      <div className={styles.repositories__container}>
-        <SearchBar />
-        <Repositories className={styles.repositories} />
-      </div>
-    </GitHubStoreContextProvider>
+    <Suspense>
+      <GitHubStoreContextProvider>
+        <div className={styles.repositories__container}>
+          <SearchBar />
+          <Repositories className={styles.repositories} />
+        </div>
+      </GitHubStoreContextProvider>
+    </Suspense>
   )
 }
 
