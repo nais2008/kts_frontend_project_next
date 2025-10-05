@@ -1,0 +1,16 @@
+@use "@/styles/variables";
+@use "@/styles/mixins";
+
+.footer {
+  margin-top: 20px;
+  padding-block: variables.$spacing-20;
+  border-top: 2px solid variables.$grey;
+
+  &__container {
+    @include mixins.container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+}

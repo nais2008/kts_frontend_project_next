@@ -1,0 +1,22 @@
+@use "./variables";
+
+@mixin container($margin-block: 0) {
+  max-width: 1240px;
+  margin: $margin-block auto;
+  @content;
+
+  @media screen and (width < variables.$breakpoint-xl) {
+    padding-inline: variables.$spacing-20;
+  }
+}
+
+@mixin twoLines {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 100%;
+
+  & > * {
+    flex-basis: 49%;
+  }
+}

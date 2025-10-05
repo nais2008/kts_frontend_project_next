@@ -1,0 +1,10 @@
+@use "@/styles/variables";
+
+.search_contant {
+  display: flex;
+  gap: 10px;
+
+  div {
+    flex: 1;
+  }
+}

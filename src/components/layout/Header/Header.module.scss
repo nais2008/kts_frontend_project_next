@@ -1,0 +1,26 @@
+@use "@/styles/variables";
+@use "@/styles/mixins";
+
+.header {
+  padding-block: variables.$spacing-16;
+  border-bottom: 2px solid variables.$grey;
+
+  &__container {
+    @include mixins.container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  &__avatar {
+    border-radius: 50%;
+    transition: box-shadow 0.2s linear;
+
+    @media (hover: hover) {
+      &:hover {
+        box-shadow: variables.$shadow;
+      }
+    }
+  }
+}

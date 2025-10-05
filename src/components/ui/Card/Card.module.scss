@@ -1,0 +1,65 @@
+@use "@/styles/variables";
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  background-color: variables.$back-color-second;
+  padding: 0;
+  padding-bottom: variables.$spacing-16;
+  border-radius: variables.$border-radius;
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+  cursor: pointer;
+
+  @media (hover: hover) {
+    &:hover {
+      box-shadow: variables.$shadow;
+    }
+  }
+  @media (hover: none) {
+    &:active {
+      box-shadow: variables.$shadow;
+    }
+  }
+
+  &__image {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    background: variables.$grey;
+  }
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-inline: variables.$spacing-12;
+    flex: 1;
+  }
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__contentSlot {
+    line-height: 22px;
+  }
+  &__text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  &__captionSlot {
+    line-height: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  &__title {
+    line-height: 24px;
+  }
+  &__subtitle {
+    line-height: 20px;
+  }
+}

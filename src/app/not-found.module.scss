@@ -1,0 +1,30 @@
+@use "@/styles/variables";
+
+main:has(.notFound) {
+  display: flex;
+  justify-content: center;
+}
+
+.notFound {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 100%;
+  padding-inline: variables.$spacing-8;
+
+  &__title {
+    font-size: 80px;
+  }
+  &__link {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

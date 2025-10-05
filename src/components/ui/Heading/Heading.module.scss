@@ -1,0 +1,47 @@
+@use "@/styles/variables";
+
+.view_title {
+  font-size: 44px;
+  font-weight: bold;
+  line-height: 48px;
+  width: 300px;
+}
+.view_button {
+  font-size: 18px;
+  font-weight: 400;
+}
+.view_subtitle {
+  font-size: 24px;
+}
+.view_desc {
+  font-size: 20px;
+}
+.view_paragraph {
+  font-size: 16px;
+}
+
+.weight_medium {
+  font-weight: 500;
+}
+
+.weight_bold {
+  font-weight: 700;
+}
+
+.color_primary {
+  color: variables.$primary-color;
+}
+
+.color_secondary {
+  color: variables.$secondary-color;
+}
+
+.color_accent {
+  color: variables.$accent-color;
+}
+
+.ellipsis {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
