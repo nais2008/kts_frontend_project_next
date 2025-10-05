@@ -23,7 +23,7 @@ export async function generateMetadata({
   }
 }
 
-export default function Page() {
+function Page() {
   return (
     <RepoStoreContextProvider>
       <div className={styles.repository__container}>
@@ -32,3 +32,5 @@ export default function Page() {
     </RepoStoreContextProvider>
   )
 }
+
+export default Page
