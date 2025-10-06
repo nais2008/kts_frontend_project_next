@@ -10,18 +10,26 @@
     padding-right: variables.$spacing-40;
     width: 100%;
     font-size: 16px;
-    border-radius: 0;
     border: 1px solid variables.$back-color-second;
     outline: none;
     color: variables.$primary-color;
     background-color: variables.$back-color-second;
     border-radius: variables.$border-radius;
+    transition:
+      box-shadow 0.2s,
+      border 0.2s;
 
+    @media (hover: hover) {
+      &:hover {
+        box-shadow: variables.$shadow;
+      }
+    }
     &::placeholder {
       color: variables.$secondary-color;
     }
     &:not(input:disabled):focus {
       border: 1px solid variables.$accent-color;
+      box-shadow: variables.$shadow;
     }
     &:disabled {
       background-color: variables.$grey;

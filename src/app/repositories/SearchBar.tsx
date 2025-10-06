@@ -39,7 +39,11 @@ const SearchBar: React.FC = () => {
   }, [debouncedSearchTerm, router, pathname, searchParams])
 
   return (
-    <Search value={inputValue} onChange={(value) => setInputValue(value)} />
+    <Search
+      value={inputValue}
+      onChange={(value) => setInputValue(value)}
+      placeholder="Search orgs..."
+    />
   )
 }
 

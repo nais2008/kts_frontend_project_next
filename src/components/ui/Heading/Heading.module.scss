@@ -45,3 +45,10 @@
   display: -webkit-box;
   -webkit-box-orient: vertical;
 }
+
+.heading {
+  &::selection {
+    background-color: variables.$green;
+    color: variables.$primary-color;
+  }
+}

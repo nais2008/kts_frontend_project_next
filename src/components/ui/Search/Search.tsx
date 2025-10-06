@@ -8,15 +8,16 @@ import styles from "./Search.module.scss"
 
 interface SearchProps {
   value: string
+  placeholder: string
   onChange: (value: string) => void
 }
 
-const Search: React.FC<SearchProps> = ({ value, onChange }) => {
+const Search: React.FC<SearchProps> = ({ value, placeholder, onChange }) => {
   return (
     <div className={styles.search_contant}>
       <Input
-        type="text"
-        placeholder="Search..."
+        type="search"
+        placeholder={placeholder}
         value={value}
         onChange={onChange}
         afterSlot={<IconSearch size={16} />}

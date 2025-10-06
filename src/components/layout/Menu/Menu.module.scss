@@ -1,0 +1,15 @@
+@use "@/styles/variables";
+
+.menu {
+  &__item {
+    color: color-mix(
+      in srgb,
+      variables.$primary-color,
+      variables.$secondary-color
+    );
+  }
+  &__item_active {
+    color: variables.$primary-color;
+    font-weight: 500;
+  }
+}

@@ -66,9 +66,8 @@ class GitHubStore implements ILocalStore {
       toggleFavorite: action,
     })
 
-    const favoritesFromStorage = typeof window !== "undefined"
-      ? localStorage.getItem(FAVORITES_KEY)
-      : null
+    const favoritesFromStorage =
+      typeof window !== "undefined" ? localStorage.getItem(FAVORITES_KEY) : null
     if (favoritesFromStorage) {
       this._favorites = JSON.parse(favoritesFromStorage)
     }

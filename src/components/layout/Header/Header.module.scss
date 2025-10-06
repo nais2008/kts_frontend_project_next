@@ -7,13 +7,27 @@
 
   &__container {
     @include mixins.container {
-      display: flex;
+      display: grid;
       align-items: center;
       justify-content: space-between;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-areas: "logo nav avatar";
     }
   }
-
+  &__logo {
+    grid-area: logo;
+  }
+  &__navigation {
+    justify-content: center;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    grid-area: nav;
+  }
   &__avatar {
+    grid-area: avatar;
+    justify-self: flex-end;
+    align-items: center;
     border-radius: 50%;
     transition: box-shadow 0.2s linear;
 

@@ -11,6 +11,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+ul {
+  list-style: none;
+}
+
 a {
   position: relative;
   text-decoration: none;
@@ -23,7 +27,7 @@ a:not(.btn, :has(img, svg)) {
     display: block;
     height: 2px;
     border-radius: 20px;
-    background: variables.$primary-color;
+    background: currentColor;
     position: absolute;
     left: 50%;
     bottom: 0;

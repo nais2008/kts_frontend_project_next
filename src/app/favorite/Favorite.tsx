@@ -7,6 +7,7 @@ import { IGitHubRepoModel } from "@/shared/interfaces/repository.interface"
 import { observer } from "mobx-react-lite"
 
 import FavoriteCard from "@/components/ui/FavoriteCard"
+import Heading from "@/components/ui/Heading"
 
 interface FavoriteProps {
   className?: string
@@ -15,7 +16,6 @@ interface FavoriteProps {
 const Favorite = observer(({ className }: FavoriteProps) => {
   const store = useGitHubStore()
   const [isRemoving, setIsRemoving] = React.useState(false)
-
 
   const handleToggleFavorite = React.useCallback(
     (e: React.MouseEvent, repo: IGitHubRepoModel) => {
@@ -28,7 +28,7 @@ const Favorite = observer(({ className }: FavoriteProps) => {
   )
 
   if (!store.favorites.length) {
-    return <p>Нет избранных репозиториев 💔</p>
+    return <Heading tag="p">Нет избранных репозиториев 💔</Heading>
   }
 
   return (

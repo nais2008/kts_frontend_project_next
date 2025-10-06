@@ -48,7 +48,11 @@ const Heading: React.FC<HeadingProps> = ({
     : {}
 
   return (
-    <Component className={classNames(classList)} style={style} {...props}>
+    <Component
+      className={classNames(classList, styles.heading)}
+      style={style}
+      {...props}
+    >
       {children}
     </Component>
   )

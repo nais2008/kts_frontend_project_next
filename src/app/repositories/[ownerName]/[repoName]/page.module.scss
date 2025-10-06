@@ -37,6 +37,7 @@
   }
   &__title {
     width: 100%;
+    font-size: clamp(20px, 1vw + 1rem, 40px);
   }
   &__homepage {
     display: flex;
