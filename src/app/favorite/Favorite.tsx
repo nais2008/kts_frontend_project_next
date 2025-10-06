@@ -16,15 +16,16 @@ const Favorite = observer(({ className }: FavoriteProps) => {
   const store = useGitHubStore()
   const [isRemoving, setIsRemoving] = React.useState(false)
 
-  const handleToggleFavorite = (
-    e: React.MouseEvent,
-    repo: IGitHubRepoModel
-  ) => {
-    e.stopPropagation()
-    setIsRemoving(true)
-    store.toggleFavorite(repo)
-    setTimeout(() => setIsRemoving(false), 200)
-  }
+
+  const handleToggleFavorite = React.useCallback(
+    (e: React.MouseEvent, repo: IGitHubRepoModel) => {
+      e.stopPropagation()
+      setIsRemoving(true)
+      store.toggleFavorite(repo)
+      setIsRemoving(false)
+    },
+    [store]
+  )
 
   if (!store.favorites.length) {
     return <p>Нет избранных репозиториев 💔</p>

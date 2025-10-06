@@ -21,12 +21,14 @@ import RepositoryLanguages from "./components/RepositoryLanguages"
 import RepositoryStats from "./components/RepositoryStats"
 import styles from "./page.module.scss"
 
+type ParamsProps = {
+  ownerName: string
+  repoName: string
+}
+
 const Repo: React.FC = observer(() => {
   const store = useRepoStore()
-  const { ownerName, repoName } = useParams() as {
-    ownerName: string
-    repoName: string
-  }
+  const { ownerName, repoName } = useParams<ParamsProps>()
 
   useEffect(() => {
     if (ownerName && repoName) {
