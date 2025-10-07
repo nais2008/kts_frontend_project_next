@@ -24,17 +24,7 @@
     align-items: center;
     grid-area: nav;
   }
-  &__avatar {
+  &__user {
     grid-area: avatar;
-    justify-self: flex-end;
-    align-items: center;
-    border-radius: 50%;
-    transition: box-shadow 0.2s linear;
-
-    @media (hover: hover) {
-      &:hover {
-        box-shadow: variables.$shadow;
-      }
-    }
   }
 }

@@ -15,6 +15,7 @@ export interface IGitHubRepoModel {
   topics: string[]
   homepage: string | null
   owner: IGitHubOwnerModel
+  htmlUrl: string | null
 }
 
 export interface IGitHubRepoAPI {
@@ -28,6 +29,7 @@ export interface IGitHubRepoAPI {
   forks_count: number
   topics: string[]
   homepage: string
+  html_url: string | null
 }
 
 export const normilizeRepo = (repo: IGitHubRepoAPI): IGitHubRepoModel => ({
@@ -41,4 +43,5 @@ export const normilizeRepo = (repo: IGitHubRepoAPI): IGitHubRepoModel => ({
   topics: repo.topics,
   homepage: repo.homepage,
   owner: normilizeOwner(repo.owner),
+  htmlUrl: repo.html_url,
 })

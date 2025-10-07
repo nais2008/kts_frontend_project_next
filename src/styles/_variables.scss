@@ -1,14 +1,58 @@
-$back-color: rgba(245, 245, 245, 1);
-$back-color-second: rgba(255, 255, 255, 1);
+:root {
+  --back-color: rgba(245, 245, 245, 1);
+  --back-color-second: rgba(255, 255, 255, 1);
 
-$accent-color: rgba(31, 136, 61, 1);
-$accent-color-light: rgba(31, 136, 61, 0.7);
-$accent-color-dark: rgba(8, 83, 29, 1);
+  --accent-color: rgba(31, 136, 61, 1);
+  --accent-color-light: rgba(31, 136, 61, 0.7);
+  --accent-color-dark: rgba(8, 83, 29, 1);
 
+  --primary-color: rgba(0, 0, 0, 1);
+  --secondary-color: rgba(175, 175, 175, 1);
+
+  --text-color: var(--primary-color);
+
+  --grey: rgba(217, 217, 217, 1);
+
+  --shadow: 5px 5px 10px #d1d9e6, -5px -5px 10px #ffffff;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --back-color: rgba(20, 20, 20, 1);
+    --back-color-second: rgba(34, 34, 34, 1);
+
+    --accent-color: rgba(50, 200, 100, 1);
+    --accent-color-light: rgba(50, 200, 100, 0.7);
+    --accent-color-dark: rgba(10, 60, 20, 1);
+
+    --primary-color: rgba(255, 255, 255, 1);
+    --secondary-color: rgba(150, 150, 150, 1);
+
+    --text-color: var(--primary-color);
+
+    --grey: rgba(50, 50, 50, 1);
+
+    --shadow: 5px 5px 10px #111, -5px -5px 10px #333;
+  }
+}
+
+$back-color: var(--back-color);
+$back-color-second: var(--back-color-second);
+
+$accent-color: var(--accent-color);
+$accent-color-light: var(--accent-color-light);
+$accent-color-dark: var(--accent-color-dark);
+
+$primary-color: var(--primary-color);
+$secondary-color: var(--secondary-color);
+
+$text-color: var(--text-color);
+
+$grey: var(--grey);
 $green: #32ff00;
+$white: #fff;
 
-$primary-color: rgba(0, 0, 0, 1);
-$secondary-color: rgba(175, 175, 175, 1);
+$shadow: var(--shadow);
 
 $breakpoint-s: 576px;
 $breakpoint-m: 768px;
@@ -25,8 +69,4 @@ $spacing-40: 40px;
 
 $border-radius: 8px;
 
-$grey: rgba(217, 217, 217, 1);
-
-$shadow:
-  5px 5px 10px #d1d9e6,
-  -5px -5px 10px #ffffff;
+$gitHub-grey: #21262d;

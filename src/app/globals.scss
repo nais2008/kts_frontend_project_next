@@ -11,6 +11,15 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+* {
+  font-family: var(--font-montserrat-sans);
+  line-height: 1.5;
+}
+
+html {
+  scrollbar-gutter: stable;
+}
+
 ul {
   list-style: none;
 }
@@ -45,10 +54,7 @@ a:not(.btn, :has(img, svg)) {
 body {
   min-width: 320px;
   min-height: 100vh;
-
-  font-family: var(--font-montserrat-sans);
-  line-height: 1.5;
-  font-weight: 400;
+  -webkit-overflow-scrolling: auto;
 }
 
 .container {

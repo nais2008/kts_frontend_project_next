@@ -76,7 +76,7 @@ const Repo: React.FC = observer(() => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <IconLink color="#000" />
+            <IconLink />
             <Heading weight="bold">{store.repoData.homepage}</Heading>
           </a>
         )}

@@ -17,7 +17,13 @@ const Logo: React.FC<LogoProps> = ({
 }: LogoProps) => {
   return (
     <Link href="/" className={classNames(styles.logo, className)}>
-      <Image src="/github.svg" width={32} height={32} alt="github logo" />
+      <Image
+        src="/github.svg"
+        width={30}
+        height={30}
+        alt="github logo"
+        className={styles.logo__img}
+      />
       {withTitle && (
         <Heading view="subtitle" weight="medium">
           GitHub Client

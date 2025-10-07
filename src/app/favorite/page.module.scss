@@ -2,19 +2,8 @@
 @use "@/styles/mixins";
 
 .favorites {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, 350px);
-  justify-content: space-between;
-  gap: 80px 10px;
+  @include mixins.gridContainer;
 
-  @media screen and (width <= variables.$breakpoint-xl) {
-    & {
-      justify-content: center;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 20px;
-      width: 100%;
-    }
-  }
   &__container {
     @include mixins.container {
       display: flex;

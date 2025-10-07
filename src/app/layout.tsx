@@ -1,6 +1,8 @@
 import type { Metadata } from "next"
 import { Montserrat } from "next/font/google"
 
+import HeadProvider from "@/providers/HeadProvider"
+
 import Footer from "@/components/layout/Footer"
 import Header from "@/components/layout/Header"
 
@@ -29,9 +31,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={montserratSans.variable}>
         <div id="root">
-          <Header />
-          <main>{children}</main>
-          <Footer />
+          <HeadProvider>
+            <Header />
+            <main>{children}</main>
+            <Footer />
+          </HeadProvider>
         </div>
       </body>
     </html>

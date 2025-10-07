@@ -38,6 +38,7 @@
   }
   &__afterSlot {
     position: absolute;
+    pointer-events: none;
     right: 12px;
     top: 50%;
     transform: translateY(-50%);
