@@ -12,6 +12,10 @@
       justify-content: space-between;
       grid-template-columns: 1fr 1fr 1fr;
       grid-template-areas: "logo nav avatar";
+
+      @media screen and (width <= variables.$breakpoint-m) {
+        grid-template-columns: auto 1fr auto;
+      }
     }
   }
   &__logo {
@@ -24,7 +28,14 @@
     align-items: center;
     grid-area: nav;
   }
-  &__user {
+  &__rightBlock {
     grid-area: avatar;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+
+    @media screen and (width <= variables.$breakpoint-s) {
+      flex-direction: column;
+    }
   }
 }

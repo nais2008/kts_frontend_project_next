@@ -36,6 +36,7 @@ type PrivateFields =
   | "_currentPage"
   | "_hasMore"
   | "_currentOrg"
+  | "_repoType"
 
 class GitHubStore implements ILocalStore {
   private readonly _apiStore = new ApiStore()
@@ -48,6 +49,7 @@ class GitHubStore implements ILocalStore {
   private _currentPage = 1
   private _hasMore = true
   private _currentOrg = "ktsstudio"
+  private _repoType = "all"
 
   constructor() {
     makeObservable<GitHubStore, PrivateFields>(this, {
@@ -57,6 +59,7 @@ class GitHubStore implements ILocalStore {
       _currentPage: observable,
       _hasMore: observable,
       _currentOrg: observable,
+      _repoType: observable,
       list: computed,
       meta: computed,
       favorites: computed,
@@ -131,7 +134,7 @@ class GitHubStore implements ILocalStore {
       endpoint: ENDPOINTS.repositories.create(orgName),
       data: {},
       headers: {},
-      params: { per_page: REPO_PER_PAGE, page },
+      params: { per_page: REPO_PER_PAGE, page: page, type: this._repoType },
     })
 
     runInAction(() => {
@@ -157,6 +160,7 @@ class GitHubStore implements ILocalStore {
 
   destroy(): void {
     this._qpReaction()
+    this._typeReaction()
   }
 
   private readonly _qpReaction: IReactionDisposer = reaction(
@@ -169,6 +173,14 @@ class GitHubStore implements ILocalStore {
       this.getOrganizationReposList({ orgName })
     },
     { fireImmediately: true }
+  )
+
+  private readonly _typeReaction = reaction(
+    () => rootStore.query.getParam("type"),
+    (type) => {
+      this._repoType = typeof type === "string" ? type : "all"
+      this.getOrganizationReposList({ orgName: this._currentOrg, type: this._repoType })
+    }
   )
 }
 

@@ -78,4 +78,28 @@
     border-radius: variables.$border-radius;
     padding: 16px;
   }
+  &__markdown {
+    border-radius: 12px;
+    padding: 24px;
+    opacity: 1;
+
+    pre {
+      color: variables.$text-color;
+      background-color: variables.$back-color;
+    }
+  }
+
+  &__markdownLight {
+    @extend .repository__markdown;
+    background-color: variables.$back-color-second !important;
+    color: variables.$text-color !important;
+    color-scheme: light;
+  }
+
+  &__markdownDark {
+    @extend .repository__markdown;
+    background-color: variables.$back-color-second !important;
+    color: variables.$text-color !important;
+    color-scheme: dark;
+  }
 }

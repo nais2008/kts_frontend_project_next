@@ -1,15 +1,77 @@
 @use "@/styles/variables";
 
 .menu {
-  &__item {
-    color: color-mix(
-      in srgb,
-      variables.$primary-color,
-      variables.$secondary-color
-    );
-  }
-  &__item_active {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  &__toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 20;
     color: variables.$primary-color;
-    font-weight: 500;
+
+    @media (width <= variables.$breakpoint-l) {
+      display: block;
+    }
+  }
+  &__list {
+    display: flex;
+    gap: 24px;
+
+    @media (width <= variables.$breakpoint-l) {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background-color: variables.$back-color-second;
+      flex-direction: column;
+      gap: 0;
+      width: 200px;
+      border-radius: variables.$border-radius;
+      box-shadow: variables.$shadow;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.2s;
+      z-index: 10;
+      overflow: hidden;
+      border: 1px solid variables.$back-color;
+    }
+  }
+
+  &__list_open {
+    @media (width <= variables.$breakpoint-l) {
+      opacity: 1;
+      pointer-events: all;
+    }
+  }
+
+  &__item {
+    text-decoration: none;
+    transition: background 0.2s;
+    width: 100%;
+    padding: variables.$spacing-12;
+    color: color-mix(in srgb, variables.$text-color 60%, variables.$back-color);
+
+    &_active {
+      color: variables.$text-color;
+    }
+    @media (width <= variables.$breakpoint-l) {
+      &::after {
+        height: 0 !important;
+      }
+      @media (hover: hover) {
+        &:hover {
+          background: variables.$back-color;
+        }
+      }
+      @media (hover: none) {
+        &:active {
+          background: variables.$back-color;
+        }
+      }
+    }
   }
 }

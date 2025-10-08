@@ -16,6 +16,7 @@ export interface IGitHubRepoModel {
   homepage: string | null
   owner: IGitHubOwnerModel
   htmlUrl: string | null
+  strapiId?: number;
 }
 
 export interface IGitHubRepoAPI {

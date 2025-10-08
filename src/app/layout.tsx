@@ -17,7 +17,7 @@ const montserratSans = Montserrat({
 export const metadata: Metadata = {
   title: {
     template: "%s | GitHub Client",
-    default: "",
+    default: "GitHub Client",
   },
   description: "Front-end project kts",
 }

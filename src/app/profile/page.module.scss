@@ -1,23 +1,26 @@
 @use "@/styles/mixins";
 @use "@/styles/variables";
 
-.repositories {
-  @include mixins.gridContainer;
-
-  & > p {
-    grid-column: 1 / -1;
-    text-align: center;
-  }
+.profile {
   &__title {
-    text-align: center;
     width: 100%;
+    text-align: center;
   }
+
   &__container {
     @include mixins.container {
       display: flex;
       flex-direction: column;
       gap: 40px;
       padding-top: variables.$spacing-40;
+    }
+  }
+  &__repos {
+    @include mixins.gridContainer;
+
+    & > p {
+      grid-column: 1 / -1;
+      text-align: center;
     }
   }
 }
