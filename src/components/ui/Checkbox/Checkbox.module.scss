@@ -1,0 +1,56 @@
+@use "@/styles/variables";
+
+.checkbox {
+  &__wrapper {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+  }
+  &__input {
+    position: absolute;
+    opacity: 0;
+    height: 0;
+    width: 0;
+
+    &:focus + .checkbox__indicator {
+      box-shadow: 0 0 0 3px variables.$green;
+    }
+
+    &:checked + .checkbox__indicator {
+      background-color: variables.$accent-color;
+      border-color: variables.$accent-color-dark;
+      padding: variables.$spacing-8;
+
+      &::after {
+        content: "";
+        display: block;
+        width: 5px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg) translate(-50%, -50%);
+        position: absolute;
+        top: 50%;
+        left: 20%;
+        margin-top: -2px;
+      }
+    }
+  }
+}
+
+.checkbox__indicator {
+  height: 16px;
+  width: 16px;
+  background-color: variables.$back-color-second;
+  border: 2px solid variables.$green;
+  border-radius: 3px;
+  margin-right: 8px;
+  flex-shrink: 0;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+}
+
+.checkbox__label {
+  line-height: 1.2;
+}

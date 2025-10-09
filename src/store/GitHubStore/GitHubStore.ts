@@ -179,7 +179,10 @@ class GitHubStore implements ILocalStore {
     () => rootStore.query.getParam("type"),
     (type) => {
       this._repoType = typeof type === "string" ? type : "all"
-      this.getOrganizationReposList({ orgName: this._currentOrg, type: this._repoType })
+      this.getOrganizationReposList({
+        orgName: this._currentOrg,
+        type: this._repoType,
+      })
     }
   )
 }

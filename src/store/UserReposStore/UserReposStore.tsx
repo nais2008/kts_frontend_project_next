@@ -34,6 +34,16 @@ type PrivateFields =
   | "_hasMore"
   | "_repoType"
 
+export interface ICreateRepoParams {
+  name: string
+  description?: string
+  homepage?: string
+  private: boolean
+  has_issues?: boolean
+  has_wiki?: boolean
+  has_downloads?: boolean
+}
+
 class UserReposStore implements ILocalStore {
   private readonly _apiStore = new ApiStore()
   private _list: TCollectionMoldel<number, IGitHubRepoModel> =
@@ -138,6 +148,47 @@ class UserReposStore implements ILocalStore {
         this._meta = MetaValues.ERROR
       })
     }
+  }
+  async createRepository(params: ICreateRepoParams): Promise<boolean> {
+    if (!this._accessToken) return false
+
+    let success = false
+
+    try {
+      const response = await this._apiStore.request<IGitHubRepoAPI>({
+        method: HTTPMethod.POST,
+        endpoint: ENDPOINTS.userRepositories.create(),
+        data: params,
+        headers: {
+          Authorization: `token ${this._accessToken}`,
+          Accept: "application/vnd.github.v3+json",
+          "Content-Type": "application/json",
+        },
+      })
+
+      runInAction(() => {
+        if (response.success && response.data) {
+          const newRepoModel = normilizeRepo(response.data)
+
+          const currentList = lineorizeCollection(this._list)
+
+          const updatedList = [newRepoModel, ...currentList]
+
+          this._list = normilizeCollection(updatedList, (i) => i.id)
+
+          success = true
+        } else {
+          success = false
+        }
+      })
+    } catch (error) {
+      console.error("Error during repository creation:", error)
+      runInAction(() => {
+        success = false
+      })
+    }
+
+    return success
   }
   destroy(): void {
     this._typeReaction()

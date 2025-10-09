@@ -1,0 +1,9 @@
+@use "@/styles/variables";
+
+.error {
+  padding: variables.$spacing-12;
+  border-radius: variables.$border-radius;
+  background-color: variables.$back-color-second;
+  font-size: 12px;
+  color: color-mix(in srgb, variables.$back-color-second, tomato 75%);
+}

@@ -11,8 +11,9 @@
     @include mixins.container {
       display: flex;
       flex-direction: column;
-      gap: 40px;
+      gap: variables.$spacing-20;
       padding-top: variables.$spacing-40;
+      position: relative;
     }
   }
   &__repos {
@@ -22,5 +23,8 @@
       grid-column: 1 / -1;
       text-align: center;
     }
+  }
+  &__btn {
+    align-self: flex-start;
   }
 }

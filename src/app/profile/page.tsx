@@ -5,12 +5,12 @@ import { UserReposStoreContextProvider } from "@/providers/UserReposProvider"
 
 import Heading from "@/components/ui/Heading"
 
-import SearchBar from "./SearchBar"
-import UserRepos from "./UserRepos"
+import ProfileRepos from "./ProfileRepos"
 import styles from "./page.module.scss"
 
 export default async function Page() {
   const session = await getServerSession(authOptions)
+  const accessToken = session?.accessToken || ""
 
   return (
     <UserReposStoreContextProvider accessToken={session?.accessToken || ""}>
@@ -18,8 +18,7 @@ export default async function Page() {
         <Heading view="title" tag="h1" className={styles.profile__title}>
           Your repositories
         </Heading>
-        <SearchBar />
-        <UserRepos className={styles.profile__repos} />
+        <ProfileRepos accessToken={accessToken} />
       </section>
     </UserReposStoreContextProvider>
   )

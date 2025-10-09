@@ -8,7 +8,7 @@ export type InputProps = Omit<
   React.InputHTMLAttributes<HTMLInputElement>,
   "onChange" | "value"
 > & {
-  value: string
+  value?: string
   onChange: (value: string) => void
   afterSlot?: React.ReactNode
 }
@@ -17,7 +17,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, value, onChange, afterSlot, ...props }, ref) => {
     const handlerChange = React.useCallback(
       (event: React.ChangeEvent<HTMLInputElement>) => {
-        onChange(event.target.value)
+        if (onChange) {
+          onChange(event.target.value)
+        }
       },
       [onChange]
     )
