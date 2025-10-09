@@ -13,6 +13,7 @@ import { enableStaticRendering, observer } from "mobx-react-lite"
 
 import Button from "@/components/ui/Button"
 import Card from "@/components/ui/Card"
+import Heading from "@/components/ui/Heading"
 import Loader from "@/components/ui/Loader"
 
 import { formatDate } from "@/utils/formatDate"
@@ -27,6 +28,17 @@ const Repositories = observer(({ className }: RepositoriesProps) => {
   const router = useRouter()
   const store = useGitHubStore()
 
+  const repositoriesMessage =
+    store.list.length > 0 ? (
+      <Heading tag="p">🎉 Все репозитории загружены</Heading>
+    ) : (
+      <Heading tag="p">Нет репозиториев :(</Heading>
+    )
+
+  const loader = Array.from({ length: 6 }).map((_, i) => (
+    <Loader key={i} size="s" />
+  ))
+
   if (store.meta === MetaValues.ERROR) {
     return <p>Ничего не найдено :(</p>
   }
@@ -36,18 +48,11 @@ const Repositories = observer(({ className }: RepositoriesProps) => {
       dataLength={store.list.length}
       next={() => store.getMoreRepos()}
       hasMore={store.hasMore}
-      loader={Array.from({ length: 6 }).map((_, i) => (
-        <Loader key={i} size="s" />
-      ))}
+      loader={loader}
       scrollThreshold={0.9}
       className={className}
-      endMessage={
-        store.list.length > 0 ? (
-          <p>🎉 Все репозитории загружены</p>
-        ) : (
-          <p>Нет репозиториев :(</p>
-        )
-      }
+      endMessage={repositoriesMessage}
+      style={{ overflow: "visible" }}
     >
       {store.list.map((repo) => {
         const isFav = store.isFavorite(repo.id)

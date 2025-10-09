@@ -2,9 +2,10 @@
 
 .search_contant {
   display: flex;
+  align-items: center;
   gap: 10px;
 
-  div {
+  div:first-child {
     flex: 1;
   }
 }

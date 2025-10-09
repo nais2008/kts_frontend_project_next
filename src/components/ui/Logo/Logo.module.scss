@@ -1,5 +1,13 @@
+@use "@/styles/variables";
+
 .logo {
   display: flex;
   align-items: center;
   gap: 24px;
+
+  &__img {
+    background-color: variables.$white;
+    border-radius: 50%;
+    padding: 1px;
+  }
 }

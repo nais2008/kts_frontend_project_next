@@ -15,7 +15,10 @@ const SearchBar: React.FC = () => {
   const searchParams = useSearchParams()
 
   const initialQuery = searchParams.get("search") || ""
+  const initialType = searchParams.get("type") || "all"
+
   const [inputValue, setInputValue] = useState(initialQuery)
+  const [repoType, setRepoType] = useState(initialType)
 
   const debouncedSearchTerm = useDebounce(inputValue, 500)
 
@@ -28,6 +31,12 @@ const SearchBar: React.FC = () => {
       params.delete("search")
     }
 
+    if (repoType && repoType !== "all") {
+      params.set("type", repoType)
+    } else {
+      params.delete("type")
+    }
+
     const newUrl = `${pathname}?${params.toString()}`
 
     router.push(newUrl, { scroll: false })
@@ -36,10 +45,16 @@ const SearchBar: React.FC = () => {
       const searchString = newUrl.split("?")[1] || ""
       rootStore.query.setSearch(searchString)
     }
-  }, [debouncedSearchTerm, router, pathname, searchParams])
+  }, [debouncedSearchTerm, repoType, router, pathname, searchParams])
 
   return (
-    <Search value={inputValue} onChange={(value) => setInputValue(value)} />
+    <Search
+      value={inputValue}
+      onChange={(value) => setInputValue(value)}
+      placeholder="Search orgs..."
+      repoType={repoType}
+      onTypeChange={setRepoType}
+    />
   )
 }
 

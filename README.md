@@ -26,9 +26,17 @@ touch .env
 
 #### Создать токен [здесь (\*тык)](https://github.com/settings/tokens)
 
+#### Создать OAuth токен [здесь (\*тык)](https://github.com/settings/developers)
+
 ### Заполняем
 
 ```env
+NEXTAUTH_URL=your_nextauth_url_project
+NEXTAUTH_SECRET=your_nextauth_secret_token
+
+GITHUB_CLIENT_ID=your_github_client_id
+GITHUB_CLIENT_SECRET=your_github_client_secret
+
 NEXT_PUBLIC_GITHUB_TOKEN=your_github_token
 ```
 

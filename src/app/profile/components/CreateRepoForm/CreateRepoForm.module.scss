@@ -1,0 +1,16 @@
+@use "@/styles/variables";
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  &__required {
+    color: color-mix(in srgb, variables.$back-color-second, tomato 75%);
+  }
+}

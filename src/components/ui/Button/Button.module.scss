@@ -14,7 +14,6 @@
   cursor: pointer;
   transition: background 0.2s;
   border-radius: variables.$border-radius;
-
   @media (hover: hover) {
     &:not(&:disabled):hover {
       background: variables.$accent-color-light;
@@ -23,7 +22,20 @@
   &:not(&:disabled):active {
     background-color: variables.$accent-color-dark;
   }
+
   &:disabled {
     background: variables.$grey;
+  }
+  &_primary {
+    background-color: variables.$gitHub-grey;
+
+    @media (hover: hover) {
+      &:not(&:disabled):hover {
+        background: rgba($color: variables.$gitHub-grey, $alpha: 0.8);
+      }
+    }
+    &:not(&:disabled):active {
+      background-color: rgba($color: variables.$gitHub-grey, $alpha: 0.8);
+    }
   }
 }

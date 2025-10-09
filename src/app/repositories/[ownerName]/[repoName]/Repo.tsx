@@ -8,7 +8,10 @@ import { useParams } from "next/navigation"
 
 import { ROUTES } from "@/config/routes.config"
 import { useRepoStore } from "@/providers/RepoProvider"
+import { useTheme } from "@/providers/ThemeProvider"
 import { MetaValues } from "@/shared/types/meta.type"
+import classNames from "classnames"
+import "github-markdown-css/github-markdown-dark.css"
 import "github-markdown-css/github-markdown-light.css"
 import { ChevronLeft, Link as IconLink } from "lucide-react"
 import { observer } from "mobx-react-lite"
@@ -21,12 +24,15 @@ import RepositoryLanguages from "./components/RepositoryLanguages"
 import RepositoryStats from "./components/RepositoryStats"
 import styles from "./page.module.scss"
 
+type ParamsProps = {
+  ownerName: string
+  repoName: string
+}
+
 const Repo: React.FC = observer(() => {
   const store = useRepoStore()
-  const { ownerName, repoName } = useParams() as {
-    ownerName: string
-    repoName: string
-  }
+  const { ownerName, repoName } = useParams<ParamsProps>()
+  const { resolvedTheme } = useTheme()
 
   useEffect(() => {
     if (ownerName && repoName) {
@@ -74,7 +80,7 @@ const Repo: React.FC = observer(() => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <IconLink color="#000" />
+            <IconLink />
             <Heading weight="bold">{store.repoData.homepage}</Heading>
           </a>
         )}
@@ -109,7 +115,12 @@ const Repo: React.FC = observer(() => {
         <div className={styles.repository__readme}>
           <Heading weight="bold">README.md</Heading>
           <div
-            className="markdown-body"
+            className={classNames(
+              "markdown-body",
+              resolvedTheme === "dark"
+                ? styles.repository__markdownDark
+                : styles.repository__markdownLight
+            )}
             dangerouslySetInnerHTML={{ __html: store.readmeHtml }}
           />
         </div>

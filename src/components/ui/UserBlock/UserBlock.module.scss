@@ -1,0 +1,76 @@
+@use "@/styles/variables";
+
+.userBlock {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: flex-end;
+
+  &__avatar {
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    @media (hover: hover) {
+      &:hover {
+        box-shadow: variables.$shadow;
+      }
+    }
+    @media (hover: none) {
+      &:active {
+        box-shadow: variables.$shadow;
+      }
+    }
+  }
+  &__menu {
+    position: absolute;
+    top: 42px;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    background: variables.$back-color-second;
+    border: 1px solid variables.$back-color;
+    border-radius: variables.$border-radius;
+    box-shadow: variables.$shadow;
+    overflow: hidden;
+    z-index: 10;
+  }
+  &__menuItem {
+    padding: variables.$spacing-12 variables.$spacing-16;
+    font-size: 14px;
+    background: none;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+    color: variables.$text-color;
+    font-weight: 400;
+
+    &::after {
+      height: 0 !important;
+    }
+    @media (hover: hover) {
+      &:hover {
+        background: variables.$back-color;
+      }
+    }
+    @media (hover: none) {
+      &:active {
+        background: variables.$back-color;
+      }
+    }
+  }
+  &__gitHubBtn {
+    padding: variables.$spacing-8;
+    justify-self: flex-end;
+
+    & > p {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-direction: row;
+      font-size: 14px;
+    }
+  }
+}

@@ -7,20 +7,35 @@
 
   &__container {
     @include mixins.container {
-      display: flex;
+      display: grid;
       align-items: center;
       justify-content: space-between;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-areas: "logo nav avatar";
+
+      @media screen and (width <= variables.$breakpoint-m) {
+        grid-template-columns: auto 1fr auto;
+      }
     }
   }
+  &__logo {
+    grid-area: logo;
+  }
+  &__navigation {
+    justify-content: center;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    grid-area: nav;
+  }
+  &__rightBlock {
+    grid-area: avatar;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
 
-  &__avatar {
-    border-radius: 50%;
-    transition: box-shadow 0.2s linear;
-
-    @media (hover: hover) {
-      &:hover {
-        box-shadow: variables.$shadow;
-      }
+    @media screen and (width <= variables.$breakpoint-s) {
+      flex-direction: column;
     }
   }
 }

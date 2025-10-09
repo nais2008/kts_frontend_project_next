@@ -58,6 +58,7 @@
   }
   &__title {
     line-height: 24px;
+    text-overflow: ellipsis;
   }
   &__subtitle {
     line-height: 20px;

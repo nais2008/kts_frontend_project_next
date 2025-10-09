@@ -1,3 +1,5 @@
+import { Suspense } from "react"
+
 import type { Metadata } from "next"
 
 import { GitHubStoreContextProvider } from "@/providers/GutHubProvider"
@@ -5,7 +7,6 @@ import { GitHubStoreContextProvider } from "@/providers/GutHubProvider"
 import Repositories from "./Repositories"
 import SearchBar from "./SearchBar"
 import styles from "./page.module.scss"
-import { Suspense } from "react"
 
 export const metadata: Metadata = {
   title: "Repositories",

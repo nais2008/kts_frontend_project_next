@@ -1,7 +1,9 @@
 export const ENDPOINTS = {
+  userRepositories: {
+    create: () => `/user/repos`,
+  },
   repositories: {
-    create: (org: string, type: string = "all") =>
-      `/orgs/${org}/repos?type=${type}`,
+    create: (org: string) => `/orgs/${org}/repos`,
   },
   repository: {
     info: {
